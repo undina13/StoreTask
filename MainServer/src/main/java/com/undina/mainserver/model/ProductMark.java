@@ -12,14 +12,14 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "product_reviews")
-public class ProductReview {
+@Table(name = "product_marks")
+public class ProductMark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "review", nullable = false)
-    private String review;
+    @Column(name = "mark", nullable = false)
+    private Integer mark;
 
     @ManyToOne
     private Product product;
@@ -31,13 +31,12 @@ public class ProductReview {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductReview that = (ProductReview) o;
-        return id.equals(that.id) && review.equals(that.review) && product.equals(that.product) && user
-                .equals(that.user);
+        ProductMark that = (ProductMark) o;
+        return id.equals(that.id) && mark.equals(that.mark) && product.equals(that.product) && user.equals(that.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, review, product, user);
+        return Objects.hash(id, mark, product, user);
     }
 }

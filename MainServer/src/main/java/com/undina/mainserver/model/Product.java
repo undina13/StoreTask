@@ -46,6 +46,9 @@ public class Product {
     @OneToMany
     private List<ProductReview> reviews;
 
+    @OneToMany
+    private List<ProductMark> marks;
+
     @Column(name = "is_available")
     private boolean isAvailable;
 
