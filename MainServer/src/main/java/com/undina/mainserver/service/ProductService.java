@@ -128,4 +128,12 @@ public class ProductService {
         product.setStatus(Status.CANCELED);
         return ProductMapper.toProductDtoFromProduct(productRepository.save(product));
     }
+
+    public List<ProductDto> getAvailableProduct(String name, Long organizationId, Integer price, List<Long> keyWords,
+                                                List<Long> characteristics) {
+        return productRepository.searchAvailableProducts(name, organizationId, price, keyWords, characteristics)
+                .stream()
+                .map(product -> ProductMapper.toProductDtoFromProduct(product))
+                .collect(Collectors.toList());
+    }
 }
