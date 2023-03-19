@@ -52,6 +52,9 @@ public class Product {
     @Column(name = "is_available")
     private boolean isAvailable;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

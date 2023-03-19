@@ -55,7 +55,8 @@ CREATE TABLE IF NOT EXISTS products
     organization_id BIGINT                                  NOT NULL,
     price           INTEGER                                 NOT NULL,
     count           INTEGER                                 NOT NULL,
-    isAvailable     BOOLEAN,
+    is_available    BOOLEAN,
+    status          VARCHAR(100)                            NOT NULL,
     CONSTRAINT pk_product PRIMARY KEY (id),
     CONSTRAINT fk_product FOREIGN KEY (organization_id) REFERENCES organizations (id) ON DELETE CASCADE
 );
