@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/{userId}//products")
+@RequestMapping(path = "/{userId}/products")
 @Slf4j
 public class ProductController {
     private final ProductService productService;
@@ -22,7 +22,7 @@ public class ProductController {
     @PostMapping
     public ProductDto createProduct(@PathVariable Long userId,
                                     @RequestBody @Valid NewProductDto newProductDto) {
-        log.info("create event  userId{} {}", userId, newProductDto);
+        log.info("create product  userId{} {}", userId, newProductDto);
         return productService.createProduct(userId, newProductDto);
     }
 }
