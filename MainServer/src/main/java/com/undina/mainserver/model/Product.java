@@ -34,19 +34,19 @@ public class Product {
     @Column(name = "count")
     private Integer count;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "products")
     private List<Discount> discounts;
 
     @ManyToMany
     private List<KeyWord> keyWords;
 
-    @ManyToMany
+    @OneToMany
     private List<Characteristic> characteristics;
 
-    @OneToMany
+    @OneToMany(mappedBy = "product")
     private List<ProductReview> reviews;
 
-    @OneToMany
+    @OneToMany(mappedBy = "product")
     private List<ProductMark> marks;
 
     @Column(name = "is_available")

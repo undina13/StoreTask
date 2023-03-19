@@ -24,8 +24,8 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "login", nullable = false)
-    private String login;
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name = "balance")
     private Integer balance;
@@ -42,11 +42,11 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return isFrozen == user.isFrozen && id.equals(user.id) && username.equals(user.username) && email
-                .equals(user.email) && login.equals(user.login) && balance.equals(user.balance) && role == user.role;
+                .equals(user.email) && password.equals(user.password) && balance.equals(user.balance) && role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, login, balance, role, isFrozen);
+        return Objects.hash(id, username, email, password, balance, role, isFrozen);
     }
 }
