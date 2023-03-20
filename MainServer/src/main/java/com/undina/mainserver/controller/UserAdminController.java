@@ -50,4 +50,11 @@ public class UserAdminController {
         log.info("unfroze user{}", userId);
         return userService.unfrozeUser(userId);
     }
+
+    @PutMapping("money/{userId}/{sum}")
+    public UserDto setMoneyToUser(@PathVariable Long userId,
+                               @PathVariable  Integer sum) {
+        log.info("set money to user{} sum []", userId, sum);
+        return userService.setMoneyToUser(userId, sum);
+    }
 }

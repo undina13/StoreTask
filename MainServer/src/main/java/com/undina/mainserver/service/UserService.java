@@ -68,4 +68,11 @@ public class UserService {
         user.setFrozen(false);
         return UserMapper.toUserDto(userRepository.save(user));
     }
+
+    public UserDto setMoneyToUser(Long userId, Integer sum) {
+        User user = checkAndGetUser(userId);
+        Integer balance = user.getBalance() + sum;
+        user.setBalance(balance);
+        return UserMapper.toUserDto(userRepository.save(user));
+    }
 }
