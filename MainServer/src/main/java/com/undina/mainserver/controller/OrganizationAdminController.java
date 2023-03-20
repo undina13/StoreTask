@@ -4,6 +4,7 @@ import com.undina.mainserver.dto.OrganizationDto;
 import com.undina.mainserver.model.Status;
 import com.undina.mainserver.service.OrganizationService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public class OrganizationAdminController {
     private final OrganizationService organizationService;
 
+    @Autowired
     public OrganizationAdminController(OrganizationService organizationService) {
         this.organizationService = organizationService;
     }

@@ -1,10 +1,7 @@
 package com.undina.mainserver.controller;
 
 import com.undina.mainserver.dto.ApiError;
-import com.undina.mainserver.exception.ObjectNotFoundException;
-import com.undina.mainserver.exception.OrganizationNotFoundException;
-import com.undina.mainserver.exception.ProductNotFoundException;
-import com.undina.mainserver.exception.UserNotOwnerException;
+import com.undina.mainserver.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -48,6 +45,16 @@ public class ExceptionHandlers {
 
     @ExceptionHandler(UserNotOwnerException.class)
     public ApiError forbidden(RuntimeException e) {
+        return ApiError.builder()
+                .status(String.valueOf(HttpStatus.FORBIDDEN))
+                .reason(REASON_MESSAGE)
+                .message(e.getLocalizedMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
+
+    @ExceptionHandler(WrongRequestException.class)
+    public ApiError forbiddenWrongRequestException(RuntimeException e) {
         return ApiError.builder()
                 .status(String.valueOf(HttpStatus.FORBIDDEN))
                 .reason(REASON_MESSAGE)

@@ -2,6 +2,7 @@ package com.undina.mainserver.service;
 
 import com.undina.mainserver.model.KeyWord;
 import com.undina.mainserver.repository.KeyWordRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class KeyWordService {
     private final KeyWordRepository keyWordRepository;
 
+    @Autowired
     public KeyWordService(KeyWordRepository keyWordRepository) {
         this.keyWordRepository = keyWordRepository;
     }

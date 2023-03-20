@@ -4,6 +4,7 @@ import com.undina.mainserver.dto.NewUserDto;
 import com.undina.mainserver.dto.UserDto;
 import com.undina.mainserver.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public class UserAdminController {
     private final UserService userService;
 
+    @Autowired
     public UserAdminController(UserService userService) {
         this.userService = userService;
     }

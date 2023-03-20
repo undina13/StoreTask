@@ -5,6 +5,7 @@ import com.undina.mainserver.dto.OrganizationDto;
 import com.undina.mainserver.service.OrganizationService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class OrganizationController {
     private final OrganizationService organizationService;
 
+    @Autowired
     public OrganizationController(OrganizationService organizationService) {
         this.organizationService = organizationService;
     }

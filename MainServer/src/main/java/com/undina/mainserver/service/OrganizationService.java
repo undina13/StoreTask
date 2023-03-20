@@ -11,6 +11,7 @@ import com.undina.mainserver.model.Status;
 import com.undina.mainserver.repository.OrganizationRepository;
 import com.undina.mainserver.repository.ProductRepository;
 import com.undina.mainserver.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,7 @@ public class OrganizationService {
     private final UserRepository userRepository;
     private final ProductService productService;
 
+    @Autowired
     public OrganizationService(OrganizationRepository organizationRepository, ProductRepository productRepository, UserRepository userRepository, ProductService productService) {
         this.organizationRepository = organizationRepository;
         this.productRepository = productRepository;

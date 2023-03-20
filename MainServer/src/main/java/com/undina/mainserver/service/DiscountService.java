@@ -7,6 +7,7 @@ import com.undina.mainserver.model.Discount;
 import com.undina.mainserver.model.Product;
 import com.undina.mainserver.repository.DiscountRepository;
 import com.undina.mainserver.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ public class DiscountService {
     private final DiscountRepository discountRepository;
     private final ProductRepository productRepository;
 
+    @Autowired
     public DiscountService(DiscountRepository discountRepository, ProductRepository productRepository) {
         this.discountRepository = discountRepository;
         this.productRepository = productRepository;
