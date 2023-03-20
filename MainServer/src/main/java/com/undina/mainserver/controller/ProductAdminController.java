@@ -34,13 +34,13 @@ public class ProductAdminController {
     }
 
     @PatchMapping("/{productId}/publish")
-    public ProductDto publishEventByAdmin(@PathVariable Long productId) {
+    public ProductDto publishProductByAdmin(@PathVariable Long productId) {
         log.info("publish product{} by admin", productId);
         return productService.publishProductByAdmin(productId);
     }
 
     @PatchMapping("/{productId}/reject")
-    public ProductDto rejectEventByAdmin(@PathVariable Long productId) {
+    public ProductDto rejectProductByAdmin(@PathVariable Long productId) {
         log.info("reject product {} by admin", productId);
         return productService.rejectProductByAdmin(productId);
     }

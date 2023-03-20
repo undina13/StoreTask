@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS organizations
     is_deleted  BOOLEAN,
     is_frozen   BOOLEAN,
     balance     INTEGER                                 NOT NULL,
+    status      VARCHAR(100)                            NOT NULL,
     CONSTRAINT pk_organization PRIMARY KEY (id),
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );

@@ -5,19 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewUserDto {
+public class NewOrganizationDto {
 
-    private String username;
+    private String name;
 
-    private String email;
+    private String description;
 
-    private String password;
-
-    private String role;
-
+    private  String logo;
 
 }

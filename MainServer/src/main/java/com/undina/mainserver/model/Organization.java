@@ -43,6 +43,9 @@ public class Organization {
     @Column(name = "balance", nullable = false)
     private Integer balance;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
