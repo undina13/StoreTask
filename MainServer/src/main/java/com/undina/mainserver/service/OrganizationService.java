@@ -2,11 +2,11 @@ package com.undina.mainserver.service;
 
 import com.undina.mainserver.dto.NewOrganizationDto;
 import com.undina.mainserver.dto.OrganizationDto;
-import com.undina.mainserver.dto.ProductDto;
 import com.undina.mainserver.exception.ObjectNotFoundException;
 import com.undina.mainserver.exception.OrganizationNotFoundException;
 import com.undina.mainserver.mapper.OrganizationMapper;
 import com.undina.mainserver.model.Organization;
+import com.undina.mainserver.model.Product;
 import com.undina.mainserver.model.Status;
 import com.undina.mainserver.repository.OrganizationRepository;
 import com.undina.mainserver.repository.ProductRepository;
@@ -68,6 +68,8 @@ public class OrganizationService {
         Organization organization = organizationRepository.findById(organizationId)
                 .orElseThrow(() -> new OrganizationNotFoundException("Organization not found"));
         organization.setFrozen(true);
+        List<Product> products = setFrozen(organization.getProducts());
+        organization.setProducts(products);
         return OrganizationMapper.toOrganizationDto(organizationRepository.save(organization));
     }
 
@@ -82,7 +84,17 @@ public class OrganizationService {
         Organization organization = organizationRepository.findById(organizationId)
                 .orElseThrow(() -> new OrganizationNotFoundException("Organization not found"));
         organization.setFrozen(true);
+        List<Product> products = setFrozen(organization.getProducts());
+        organization.setProducts(products);
         organization.setDeleted(true);
         return OrganizationMapper.toOrganizationDto(organizationRepository.save(organization));
+    }
+
+    private List<Product> setFrozen(List<Product> products) {
+        for (Product product : products) {
+            product.setAvailable(false);
+        }
+        productRepository.saveAll(products);
+        return products;
     }
 }
