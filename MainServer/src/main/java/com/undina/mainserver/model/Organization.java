@@ -40,6 +40,9 @@ public class Organization {
     @Column(name = "is_frozen")
     private boolean isFrozen;
 
+    @Column(name = "balance", nullable = false)
+    private Integer balance;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

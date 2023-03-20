@@ -31,6 +31,12 @@ public class Purchase {
     @Column(name = "price", nullable = false)
     private Integer price;
 
+    @Column(name = "count", nullable = false)
+    private Integer count;
+
+    @Column(name = "sum", nullable = false)
+    private Integer sum;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
