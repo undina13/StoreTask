@@ -11,6 +11,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findAllByStatus(Status status);
 
+    List<Product> findAllByIdIn(List<Long> ids);
+
     @Query("SELECT p FROM Product AS p " +
             "WHERE ((:name) IS NULL OR p.name = :name) " +
             "AND ((:organizationId) IS NULL OR p.organization.id = :organizationId)" +

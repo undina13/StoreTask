@@ -69,6 +69,7 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public ProductDto updateProductByAdmin(Long productId, AdminUpdateProductRequest adminUpdateProductRequest) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found"));
@@ -114,6 +115,7 @@ public class ProductService {
         return ProductMapper.toProductDtoFromProduct(productRepository.save(product));
     }
 
+    @Transactional
     public ProductDto publishProductByAdmin(Long productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found"));
@@ -122,6 +124,7 @@ public class ProductService {
         return ProductMapper.toProductDtoFromProduct(productRepository.save(product));
     }
 
+    @Transactional
     public ProductDto rejectProductByAdmin(Long productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found"));
@@ -133,7 +136,7 @@ public class ProductService {
                                                 List<Long> characteristics) {
         return productRepository.searchAvailableProducts(name, organizationId, price, keyWords, characteristics)
                 .stream()
-                .map(product -> ProductMapper.toProductDtoFromProduct(product))
+                .map(ProductMapper::toProductDtoFromProduct)
                 .collect(Collectors.toList());
     }
 }
