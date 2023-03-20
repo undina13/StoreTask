@@ -139,4 +139,13 @@ public class ProductService {
                 .map(ProductMapper::toProductDtoFromProduct)
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+   public List<Product> setFrozen(List<Product> products) {
+        for (Product product : products) {
+            product.setAvailable(false);
+        }
+        productRepository.saveAll(products);
+        return products;
+    }
 }

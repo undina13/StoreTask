@@ -24,11 +24,13 @@ public class OrganizationService {
     private final OrganizationRepository organizationRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
+    private final ProductService productService;
 
-    public OrganizationService(OrganizationRepository organizationRepository, ProductRepository productRepository, UserRepository userRepository) {
+    public OrganizationService(OrganizationRepository organizationRepository, ProductRepository productRepository, UserRepository userRepository, ProductService productService) {
         this.organizationRepository = organizationRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
+        this.productService = productService;
     }
 
     @Transactional
@@ -50,6 +52,7 @@ public class OrganizationService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public OrganizationDto publishOrganizationByAdmin(Long organizationId) {
         Organization organization = organizationRepository.findById(organizationId)
                 .orElseThrow(() -> new OrganizationNotFoundException("Organization not found"));
@@ -57,6 +60,7 @@ public class OrganizationService {
         return OrganizationMapper.toOrganizationDto(organizationRepository.save(organization));
     }
 
+    @Transactional
     public OrganizationDto rejectOrganizationByAdmin(Long organizationId) {
         Organization organization = organizationRepository.findById(organizationId)
                 .orElseThrow(() -> new OrganizationNotFoundException("Organization not found"));
@@ -64,15 +68,17 @@ public class OrganizationService {
         return OrganizationMapper.toOrganizationDto(organizationRepository.save(organization));
     }
 
+    @Transactional
     public OrganizationDto frozeOrganizationByAdmin(Long organizationId) {
         Organization organization = organizationRepository.findById(organizationId)
                 .orElseThrow(() -> new OrganizationNotFoundException("Organization not found"));
         organization.setFrozen(true);
-        List<Product> products = setFrozen(organization.getProducts());
+        List<Product> products = productService.setFrozen(organization.getProducts());
         organization.setProducts(products);
         return OrganizationMapper.toOrganizationDto(organizationRepository.save(organization));
     }
 
+    @Transactional
     public OrganizationDto unfrozeOrganizationByAdmin(Long organizationId) {
         Organization organization = organizationRepository.findById(organizationId)
                 .orElseThrow(() -> new OrganizationNotFoundException("Organization not found"));
@@ -80,21 +86,14 @@ public class OrganizationService {
         return OrganizationMapper.toOrganizationDto(organizationRepository.save(organization));
     }
 
+    @Transactional
     public OrganizationDto deleteOrganizationByAdmin(Long organizationId) {
         Organization organization = organizationRepository.findById(organizationId)
                 .orElseThrow(() -> new OrganizationNotFoundException("Organization not found"));
         organization.setFrozen(true);
-        List<Product> products = setFrozen(organization.getProducts());
+        List<Product> products = productService.setFrozen(organization.getProducts());
         organization.setProducts(products);
         organization.setDeleted(true);
         return OrganizationMapper.toOrganizationDto(organizationRepository.save(organization));
-    }
-
-    private List<Product> setFrozen(List<Product> products) {
-        for (Product product : products) {
-            product.setAvailable(false);
-        }
-        productRepository.saveAll(products);
-        return products;
     }
 }
