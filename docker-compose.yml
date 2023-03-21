@@ -1,0 +1,54 @@
+version: '3.1'
+services:
+  stats-server:
+    build: ./message_server
+    container_name: message-server
+    restart: always
+    ports:
+      - "9090:9090"
+    depends_on:
+      - message-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://message-db:5432/message_server
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+
+
+  message-db:
+    image: postgres:14-alpine
+    container_name: message-db
+    ports:
+      - "5433:5432"
+    volumes:
+      - /var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=message_server
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+
+  ewm-service:
+    build: ./main_server
+    container_name: main_server
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - ewm-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://ewm-db:5432/main_server
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - MESSAGE_SERVER_URL=http://message-server:9090
+
+
+  ewm-db:
+    image: postgres:14-alpine
+    container_name: ewm-db
+    ports:
+      - "5434:5432"
+    volumes:
+      - /var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=main_server
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root

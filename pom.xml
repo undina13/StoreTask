@@ -10,7 +10,7 @@
 	</parent>
 	<modules>
 		<module>MainServer</module>
-		<module>Gateway</module>
+		<module>MessageServer</module>
 	</modules>
 	<groupId>com.undina</groupId>
 	<artifactId>StoreTask</artifactId>
@@ -19,7 +19,7 @@
 	<name>StoreTask</name>
 
 	<properties>
-		<java.version>17</java.version>
+		<java.version>11</java.version>
 	</properties>
 
 </project>
